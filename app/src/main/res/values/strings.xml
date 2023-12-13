@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">RickAndMortyVS</string>
+    <string name="menu_item_title_characters">Characters</string>
+    <string name="menu_item_title_locations">Locations</string>
+    <string name="menu_item_title_episodes">Episodes</string>
 </resources>
