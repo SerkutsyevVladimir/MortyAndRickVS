@@ -7,7 +7,7 @@ data class RestCharacter(
     @SerializedName("name") val name: String,
     @SerializedName("status") val status: String,
     @SerializedName("species") val species: String,
-    @SerializedName("tyoe") val type: String,
+    @SerializedName("type") val type: String,
     @SerializedName("gender") val gender: String,
     @SerializedName("origin") val origin: RestOrigin,
     @SerializedName("location") val location: RestLocation,
