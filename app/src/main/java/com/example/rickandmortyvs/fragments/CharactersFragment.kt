@@ -34,6 +34,7 @@ class CharactersFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        getData()
 
 
         return binding.root
