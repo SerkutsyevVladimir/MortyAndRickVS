@@ -10,6 +10,6 @@
              drawable. -->
         <item name="windowSplashScreenAnimatedIcon">@mipmap/splash_image</item>
         <!-- Set the theme of the Activity that follows your splash screen. -->
-        <item name="postSplashScreenTheme">@style/Theme.AppCompat</item>
+        <item name="postSplashScreenTheme">@style/Theme.AppCompat.DayNight.NoActionBar</item>
     </style>
 </resources>

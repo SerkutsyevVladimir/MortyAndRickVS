@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 interface RickAndMortyApi {
 
-    @GET("/character")
+    @GET("api/character")
     suspend fun getCharactersList(
         @Query("page") page: Int?,
         @Query("name") name: String?,
@@ -22,12 +22,12 @@ interface RickAndMortyApi {
         @Query("gender") gender: String?
     ): Response<RestCharactersList>
 
-    @GET("/character/{id}")
+    @GET("api/character/{id}")
     suspend fun getSpecificCharacter(
         @Path("id") id: Int
     ): Response<RestCharacter>
 
-    @GET("/character/{ids}")
+    @GET("api/character/{ids}")
     suspend fun getMultipleCharacters(
         @Path("ids") ids: String
     ): Response<List<RestCharacter>>
@@ -35,7 +35,7 @@ interface RickAndMortyApi {
 
     companion object {
 
-        private const val BASE_URL = "https://rickandmortyapi.com/api"
+        private const val BASE_URL = "https://rickandmortyapi.com/"
     fun getInstance(): RickAndMortyApi {
 
             val retrofit: Retrofit = Retrofit.Builder()
