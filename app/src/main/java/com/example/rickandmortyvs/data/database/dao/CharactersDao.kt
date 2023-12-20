@@ -10,7 +10,7 @@ import com.example.rickandmortyvs.data.database.models.DBCharacter
 @Dao
 interface CharactersDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addCharactersList(characters: List<DBCharacter>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -27,11 +27,11 @@ interface CharactersDao {
 
     @Query("""
         SELECT * FROM ${DBCharacter.TABLE_NAME}
-        WHERE (${DBCharacter.CHARACTER_NAME} LIKE '%' || :name || '%')
-        AND (${DBCharacter.CHARACTER_STATUS} = :status)
-        AND (${DBCharacter.CHARACTER_SPECIES} LIKE '%' || :species || '%')
-        AND (${DBCharacter.CHARACTER_TYPE} LIKE '%' || :type || '%')
-        AND (${DBCharacter.CHARACTER_GENDER} = :gender)
+        WHERE (:name IS NULL OR ${DBCharacter.CHARACTER_NAME} LIKE '%' || :name || '%')
+        AND (:status IS NULL OR ${DBCharacter.CHARACTER_STATUS} = :status)
+        AND (:species IS NULL OR ${DBCharacter.CHARACTER_SPECIES} LIKE '%' || :species || '%')
+        AND (:type IS NULL OR ${DBCharacter.CHARACTER_TYPE} LIKE '%' || :type || '%')
+        AND (:gender IS NULL OR ${DBCharacter.CHARACTER_GENDER} = :gender)
         """)
     fun pagingSource(
         name: String?,

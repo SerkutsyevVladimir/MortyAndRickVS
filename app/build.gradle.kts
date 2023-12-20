@@ -82,9 +82,10 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.8.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
-    val paging_version = "3.2.1"
+    val pagingVersion = "3.2.1"
 
-    implementation("androidx.paging:paging-runtime:$paging_version")
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
+    implementation("androidx.paging:paging-common-ktx:$pagingVersion")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 

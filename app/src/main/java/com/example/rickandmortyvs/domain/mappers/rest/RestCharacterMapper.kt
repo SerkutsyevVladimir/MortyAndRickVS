@@ -3,14 +3,14 @@ package com.example.rickandmortyvs.domain.mappers.rest
 import com.example.rickandmortyvs.data.database.models.DBCharacter
 import com.example.rickandmortyvs.data.database.models.DBLocation
 import com.example.rickandmortyvs.data.database.models.DBOrigin
-import com.example.rickandmortyvs.data.network.models.RestCharacter
+import com.example.rickandmortyvs.data.network.models.RestCharactersList
 import com.example.rickandmortyvs.domain.mappers.Mapper
 import com.example.rickandmortyvs.domain.models.Characters
 import com.example.rickandmortyvs.domain.models.Location
 import com.example.rickandmortyvs.domain.models.Origin
 
-class RestCharacterMapper: Mapper<RestCharacter,Characters> {
-    override fun map(input: RestCharacter): Characters {
+class RestCharacterMapper: Mapper<RestCharactersList.RestCharacter,Characters> {
+    override fun map(input: RestCharactersList.RestCharacter): Characters {
         return Characters(
             id = input.id,
             name = input.name,
@@ -33,7 +33,7 @@ class RestCharacterMapper: Mapper<RestCharacter,Characters> {
         )
     }
 
-    fun mapToDBModel(input: RestCharacter): DBCharacter{
+    fun mapToDBModel(input: RestCharactersList.RestCharacter): DBCharacter{
         return DBCharacter(
             id = input.id,
             name = input.name,

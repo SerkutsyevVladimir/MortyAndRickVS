@@ -21,7 +21,8 @@ class GetCharactersListUseCase @Inject constructor(
         type: String?,
         gender: String?
     ): Flow<PagingData<Characters>> {
-        return charactersRepositoryImpl.getCharactersList(
+        return charactersRepositoryImpl
+            .getCharactersList(
                 name,
                 status,
                 species,

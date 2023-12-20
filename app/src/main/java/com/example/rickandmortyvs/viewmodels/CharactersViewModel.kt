@@ -39,16 +39,16 @@ class CharactersViewModel @Inject constructor(
     private val _networkStateFlow = MutableStateFlow(false)
     val networkStateFlow: StateFlow<Boolean> = _networkStateFlow
 
-    private val _nameStateFlow = MutableStateFlow<String?>(null)
+    private val _nameStateFlow = MutableStateFlow<String?>("")
     val nameStateFlow: StateFlow<String?> = _nameStateFlow
 
     private val _statusStateFlow = MutableStateFlow(Status.EMPTY)
     val statusStateFlow: StateFlow<Status> = _statusStateFlow
 
-    private val _speciesStateFlow = MutableStateFlow<String?>(null)
+    private val _speciesStateFlow = MutableStateFlow<String?>("")
     val speciesStateFlow: StateFlow<String?> = _speciesStateFlow
 
-    private val _typeStateFlow = MutableStateFlow<String?>(null)
+    private val _typeStateFlow = MutableStateFlow<String?>("")
     val typeStateFlow: StateFlow<String?> = _typeStateFlow
 
     private val _genderStateFlow = MutableStateFlow(Gender.EMPTY)

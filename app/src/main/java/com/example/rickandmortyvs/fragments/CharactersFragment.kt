@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.rickandmortyvs.adapters.CharactersAdapter
@@ -30,7 +31,7 @@ class CharactersFragment : Fragment() {
     private val viewModel: CharactersViewModel by viewModels()
 
     private val adapter = CharactersAdapter {
-
+        findNavController().navigate(CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailsFragment(it.id))
     }
 
     private lateinit var bottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
@@ -45,6 +46,9 @@ class CharactersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         searchAndFilterParamsCleaning()
+        binding.verticalRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.verticalRecyclerView.adapter = adapter
+        binding.placeHolderTextView.visibility = View.GONE
         bottomSheetSetup()
         swipeToRefreshSetup()
         searchSetup()
@@ -62,16 +66,10 @@ class CharactersFragment : Fragment() {
 
     private fun getData() {
         with(binding) {
-            verticalRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.getCharactersList().collectLatest {
-                    adapter.submitData(it)
-                }
 
-            }
 
             adapter.addLoadStateListener { combinedLoadStates ->
-                if (combinedLoadStates.append is LoadState.Loading || combinedLoadStates.refresh is LoadState.Loading) {
+                if (combinedLoadStates.refresh is LoadState.Loading) {
                     progressBar.visibility = View.VISIBLE
                     placeHolderTextView.visibility = View.GONE
                 } else if (adapter.itemCount == 0) {
@@ -85,7 +83,19 @@ class CharactersFragment : Fragment() {
                         "Ups...Something goes wrong",
                         Toast.LENGTH_LONG
                     ).show()
+                } else {
+                    verticalRecyclerView.visibility = View.VISIBLE
+                    placeHolderTextView.visibility = View.GONE
                 }
+            }
+
+
+            //verticalRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.getCharactersList().collectLatest {
+                    adapter.submitData(it)
+                }
+
             }
         }
     }
@@ -141,6 +151,8 @@ class CharactersFragment : Fragment() {
                 binding.filterClearButton.setOnClickListener {
                     status = Status.EMPTY
                     gender = Gender.EMPTY
+                    viewModel.addGenderFilter(gender)
+                    viewModel.addStatusFilter(status)
                     binding.statusRadioGroup.clearCheck()
                     binding.genderRadioGroup.clearCheck()
 

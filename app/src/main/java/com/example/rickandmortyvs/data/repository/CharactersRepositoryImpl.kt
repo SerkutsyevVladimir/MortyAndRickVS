@@ -39,6 +39,16 @@ class CharactersRepositoryImpl @Inject constructor(
             rickAndMortyApi,
             restCharacterMapper
         )
+        var genderNull = gender
+        if (gender == "") {
+            genderNull = null
+        }
+
+        var statusNull = status
+        if (status == "") {
+            statusNull = null
+        }
+
 
         return Pager(
             config = PagingConfig(
@@ -49,10 +59,10 @@ class CharactersRepositoryImpl @Inject constructor(
             pagingSourceFactory = {
                 appDatabase.getCharactersDao().pagingSource(
                     name,
-                    status,
+                    statusNull,
                     species,
                     type,
-                    gender
+                    genderNull
                 )
             }
         )

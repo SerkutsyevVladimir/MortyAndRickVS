@@ -1,9 +1,5 @@
 package com.example.rickandmortyvs.domain.models
 
-import com.example.rickandmortyvs.data.network.models.RestLocation
-import com.example.rickandmortyvs.data.network.models.RestOrigin
-import com.google.gson.annotations.SerializedName
-
 data class Characters (
     val id: Int,
     val name: String,

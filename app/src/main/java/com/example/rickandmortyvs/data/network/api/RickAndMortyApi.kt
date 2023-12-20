@@ -1,6 +1,5 @@
 package com.example.rickandmortyvs.data.network.api
 
-import com.example.rickandmortyvs.data.network.models.RestCharacter
 import com.example.rickandmortyvs.data.network.models.RestCharactersList
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -14,7 +13,7 @@ interface RickAndMortyApi {
 
     @GET("api/character")
     suspend fun getCharactersList(
-        @Query("page") page: Int?,
+        @Query("page") page: Int,
         @Query("name") name: String?,
         @Query("status") status: String?,
         @Query("species") species: String?,
@@ -25,12 +24,12 @@ interface RickAndMortyApi {
     @GET("api/character/{id}")
     suspend fun getSpecificCharacter(
         @Path("id") id: Int
-    ): Response<RestCharacter>
+    ): Response<RestCharactersList.RestCharacter>
 
     @GET("api/character/{ids}")
     suspend fun getMultipleCharacters(
         @Path("ids") ids: String
-    ): Response<List<RestCharacter>>
+    ): Response<List<RestCharactersList.RestCharacter>>
 
 
     companion object {

@@ -35,7 +35,7 @@ class CharactersRemoteMediator(
             // ID to let it continue from where it left off. For REFRESH,
             // pass null to load the first page.
             val loadKey = when (loadType) {
-                LoadType.REFRESH -> null
+                LoadType.REFRESH -> 1
                 // In this example, you never need to prepend, since REFRESH
                 // will always load the first page in the list. Immediately
                 // return, reporting end of pagination.
@@ -49,13 +49,18 @@ class CharactersRemoteMediator(
                     // valid for initial load. If lastItem is null it means no
                     // items were loaded after the initial REFRESH and there are
                     // no more items to load.
-                    if (lastItem == null) {
+                    if (lastItem == null){
+                        1
+                    }else{
+                        (lastItem.id / state.config.pageSize) + 1
+                    }
+                    /*{
                         return MediatorResult.Success(
                             endOfPaginationReached = true
                         )
                     }
 
-                    lastItem.id
+                    lastItem.id*/
                 }
             }
 
@@ -70,18 +75,28 @@ class CharactersRemoteMediator(
                 species = species,
                 type = type,
                 gender = gender
-            ).body()?.characters
+            ).body()?.results
+
+
+            val  test = response
 
             appDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    charactersDao.clearAll()
+                    //charactersDao.clearAll()
                 }
 
                 // Insert new users into database, which invalidates the
                 // current PagingData, allowing Paging to present the updates
                 // in the DB.
-                if (response != null) {
-                    charactersDao.addCharactersList(response.map { restCharacterMapper.mapToDBModel(it) })
+                val test = response?.map { restCharacterMapper.mapToDBModel(it) }
+                if (
+                    //response != null
+                    test?.isNotEmpty() == true
+                    ) {
+                    charactersDao.addCharactersList(
+                        //response.map { restCharacterMapper.mapToDBModel(it) }
+                    test
+                    )
                 }
             }
 
