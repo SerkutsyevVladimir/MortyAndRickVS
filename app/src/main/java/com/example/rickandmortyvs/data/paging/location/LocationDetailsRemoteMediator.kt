@@ -1,4 +1,4 @@
-package com.example.rickandmortyvs.data.paging
+package com.example.rickandmortyvs.data.paging.location
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -6,28 +6,26 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.rickandmortyvs.data.database.AppDatabase
-import com.example.rickandmortyvs.data.database.models.DBCharacter
+import com.example.rickandmortyvs.data.database.models.location.DBLocationDetails
 import com.example.rickandmortyvs.data.network.api.RickAndMortyApi
-import com.example.rickandmortyvs.domain.mappers.rest.RestCharacterMapper
+import com.example.rickandmortyvs.domain.mappers.rest.location.RestLocationDetailsMapper
 import retrofit2.HttpException
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
-class CharactersRemoteMediator(
+class LocationDetailsRemoteMediator(
     private val name: String?,
-    private val status: String?,
-    private val species: String?,
+    private val dimension: String?,
     private val type: String?,
-    private val gender: String?,
     private val appDatabase: AppDatabase,
     private val rickAndMortyApi: RickAndMortyApi,
-    private val restCharacterMapper: RestCharacterMapper
-) : RemoteMediator<Int, DBCharacter>() {
-    private val charactersDao = appDatabase.getCharactersDao()
+    private val restLocationDetailsMapper: RestLocationDetailsMapper
+) : RemoteMediator<Int, DBLocationDetails>() {
+    private val locationDao = appDatabase.getLocationsDao()
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, DBCharacter>
+        state: PagingState<Int, DBLocationDetails>
     ): MediatorResult {
         return try {
             // The network load method takes an optional after=<user.id>
@@ -68,13 +66,11 @@ class CharactersRemoteMediator(
             // wrapped in a withContext(Dispatcher.IO) { ... } block since
             // Retrofit's Coroutine CallAdapter dispatches on a worker
             // thread.
-            val response = rickAndMortyApi.getCharactersList(
+            val response = rickAndMortyApi.getLocationsList(
                 page = loadKey,
                 name = name,
-                status = status,
-                species = species,
                 type = type,
-                gender = gender
+                dimension = dimension
             ).body()?.results
 
             appDatabase.withTransaction {
@@ -85,14 +81,14 @@ class CharactersRemoteMediator(
                 // Insert new users into database, which invalidates the
                 // current PagingData, allowing Paging to present the updates
                 // in the DB.
-                val test = response?.map { restCharacterMapper.mapToDBModel(it) }
+                val test = response?.map { restLocationDetailsMapper.mapToDBModel(it) }
                 if (
-                    //response != null
+                //response != null
                     test?.isNotEmpty() == true
-                    ) {
-                    charactersDao.addCharactersList(
+                ) {
+                    locationDao.addLocationsList(
                         //response.map { restCharacterMapper.mapToDBModel(it) }
-                    test
+                        test
                     )
                 }
             }

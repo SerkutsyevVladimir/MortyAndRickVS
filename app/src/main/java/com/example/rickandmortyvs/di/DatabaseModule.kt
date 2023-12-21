@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.rickandmortyvs.data.database.AppDatabase
 import com.example.rickandmortyvs.data.database.dao.CharactersDao
+import com.example.rickandmortyvs.data.database.dao.location.LocationsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +31,11 @@ class DatabaseModule {
     @Provides
     fun provideCharactersDao(appDatabase: AppDatabase): CharactersDao {
         return appDatabase.getCharactersDao()
+    }
+
+    @Provides
+    fun provideLocationsDao(appDatabase: AppDatabase): LocationsDao {
+        return appDatabase.getLocationsDao()
     }
 
     companion object {

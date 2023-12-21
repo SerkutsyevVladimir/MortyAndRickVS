@@ -1,6 +1,7 @@
 package com.example.rickandmortyvs.data.network.api
 
 import com.example.rickandmortyvs.data.network.models.RestCharactersList
+import com.example.rickandmortyvs.data.network.models.locations.RestLocationsList
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -30,6 +31,29 @@ interface RickAndMortyApi {
     suspend fun getMultipleCharacters(
         @Path("ids") ids: String
     ): Response<List<RestCharactersList.RestCharacter>>
+
+
+    @GET("api/location/{id}")
+    suspend fun getSpecificLocation(
+        @Path("id") id: Int
+    ): Response<RestLocationsList.RestLocationDetails>
+
+    @GET("api/location/{ids}")
+    suspend fun getMultipleLocations(
+        @Path("ids") ids: String
+    ): Response<List<RestLocationsList.RestLocationDetails>>
+
+
+    @GET("api/location")
+    suspend fun getLocationsList(
+        @Query("page") page: Int,
+        @Query("name") name: String?,
+        @Query("type") type: String?,
+        @Query("dimension") dimension: String?
+    ): Response<RestLocationsList>
+
+
+
 
 
     companion object {
