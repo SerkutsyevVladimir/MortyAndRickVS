@@ -35,6 +35,8 @@ class CharactersFragment : Fragment() {
     }
 
     private lateinit var bottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
+    private lateinit var searchBottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
+
     private var charactersSearchOptions: CharactersSearchOptions = CharactersSearchOptions.NAME
     private var status: Status = Status.EMPTY
     private var gender: Gender = Gender.EMPTY
@@ -50,6 +52,7 @@ class CharactersFragment : Fragment() {
         binding.verticalRecyclerView.adapter = adapter
         binding.placeHolderTextView.visibility = View.GONE
         bottomSheetSetup()
+        searchBottomSheetSetup()
         swipeToRefreshSetup()
         searchSetup()
         getData()
@@ -162,6 +165,49 @@ class CharactersFragment : Fragment() {
 
             }
         }
+    }
+
+    private fun searchBottomSheetSetup() {
+        searchBottomSheetBehaviour = BottomSheetBehavior.from(binding.searchBottomSheet)
+        searchBottomSheetBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
+
+        with(binding) {
+            searchParams.setOnClickListener {
+                searchBottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
+                searchRadioGroup.check(
+                    when (charactersSearchOptions) {
+                        CharactersSearchOptions.NAME -> binding.nameSearchButton.id
+                        CharactersSearchOptions.SPECIES -> binding.speciesSearchButton.id
+                        CharactersSearchOptions.TYPE -> binding.typeSearchButton.id
+                        else -> -1
+                    }
+                )
+            }
+
+            searchParamsApplyButton.setOnClickListener {
+                when (searchRadioGroup.checkedRadioButtonId) {
+                    nameSearchButton.id -> charactersSearchOptions = CharactersSearchOptions.NAME
+                    speciesSearchButton.id -> charactersSearchOptions =
+                        CharactersSearchOptions.SPECIES
+
+                    typeSearchButton.id -> charactersSearchOptions = CharactersSearchOptions.TYPE
+                }
+
+                searchSetup()
+
+                searchBottomSheetBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
+
+                searchClearButton.setOnClickListener {
+                    charactersSearchOptions = CharactersSearchOptions.NAME
+
+                    searchSetup()
+
+                    searchBottomSheetBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
+                }
+
+            }
+        }
+
     }
 
     private fun swipeToRefreshSetup() {

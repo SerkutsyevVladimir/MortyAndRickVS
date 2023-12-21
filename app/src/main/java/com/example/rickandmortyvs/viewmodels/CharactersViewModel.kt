@@ -1,8 +1,5 @@
 package com.example.rickandmortyvs.viewmodels
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -36,9 +33,6 @@ class CharactersViewModel @Inject constructor(
     private val getSpecificRestCharacterUseCase: GetSpecificRestCharacterUseCase
 ) : ViewModel() {
 
-    private val _networkStateFlow = MutableStateFlow(false)
-    val networkStateFlow: StateFlow<Boolean> = _networkStateFlow
-
     private val _nameStateFlow = MutableStateFlow<String?>("")
     val nameStateFlow: StateFlow<String?> = _nameStateFlow
 
@@ -65,32 +59,6 @@ class CharactersViewModel @Inject constructor(
                 )
             }
         }
-    }
-
-
-    fun checkNetworkAvailability(context: Context) {
-        viewModelScope.launch {
-            _networkStateFlow.value = isOnline(context)
-        }
-    }
-
-    fun isOnline(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (connectivityManager != null) {
-            val capabilities =
-                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            if (capabilities != null) {
-                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                    return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
-                    return true
-                }
-            }
-        }
-        return false
     }
 
     fun getCharactersList(): Flow<PagingData<Characters>> {
