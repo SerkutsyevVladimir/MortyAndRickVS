@@ -10,6 +10,19 @@
         android:name="com.example.rickandmortyvs.fragments.LocationsFragment"
         android:label="fragment_locations"
         tools:layout="@layout/fragment_locations">
+        <action
+            android:id="@+id/action_locationFragment_to_locationDetailsFragment"
+            app:destination="@id/locationDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/locationDetailsFragment"
+        android:name="com.example.rickandmortyvs.fragments.LocationDetailsFragment"
+        android:label="fragment_character_details"
+        tools:layout="@layout/fragment_location_details">
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

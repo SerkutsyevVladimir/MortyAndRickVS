@@ -11,10 +11,6 @@ import com.example.rickandmortyvs.domain.models.Gender
 import com.example.rickandmortyvs.domain.models.SearchParameters
 import com.example.rickandmortyvs.domain.models.Status
 import com.example.rickandmortyvs.domain.usecases.GetCharactersListUseCase
-import com.example.rickandmortyvs.domain.usecases.GetMultipleDBCharactersUseCase
-import com.example.rickandmortyvs.domain.usecases.GetMultipleRestCharactersUseCase
-import com.example.rickandmortyvs.domain.usecases.GetSpecificDBCharacterUseCase
-import com.example.rickandmortyvs.domain.usecases.GetSpecificRestCharacterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,11 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    private val getCharactersListUseCase: GetCharactersListUseCase,
-    private val getMultipleDBCharactersUseCase: GetMultipleDBCharactersUseCase,
-    private val getMultipleRestCharactersUseCase: GetMultipleRestCharactersUseCase,
-    private val getSpecificDBCharacterUseCase: GetSpecificDBCharacterUseCase,
-    private val getSpecificRestCharacterUseCase: GetSpecificRestCharacterUseCase
+    private val getCharactersListUseCase: GetCharactersListUseCase
 ) : ViewModel() {
 
     private val _nameStateFlow = MutableStateFlow<String?>("")

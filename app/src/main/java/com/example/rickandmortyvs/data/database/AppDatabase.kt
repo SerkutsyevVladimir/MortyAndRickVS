@@ -10,7 +10,7 @@ import com.example.rickandmortyvs.data.database.models.location.DBLocationDetail
 import com.example.rickandmortyvs.domain.mappers.Converters
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [
         DBCharacter::class,
         DBLocationDetails::class

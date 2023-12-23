@@ -83,7 +83,7 @@ class CharactersFragment : Fragment() {
                     verticalRecyclerView.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
-                        "Ups...Something goes wrong",
+                        "Ups...Something goes wrong1",
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
