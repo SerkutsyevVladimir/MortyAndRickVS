@@ -1,4 +1,4 @@
-package com.example.rickandmortyvs.viewmodels.location
+package com.example.rickandmortyvs.viewmodels.episode
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -6,11 +6,11 @@ import android.net.NetworkCapabilities
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmortyvs.domain.models.Characters
-import com.example.rickandmortyvs.domain.models.locations.LocationDetails
+import com.example.rickandmortyvs.domain.models.episodes.Episode
 import com.example.rickandmortyvs.domain.usecases.GetMultipleDBCharactersUseCase
 import com.example.rickandmortyvs.domain.usecases.GetMultipleRestCharactersUseCase
-import com.example.rickandmortyvs.domain.usecases.locations.GetSpecificDBLocationDetailsUseCase
-import com.example.rickandmortyvs.domain.usecases.locations.GetSpecificRestLocationDetailsUseCase
+import com.example.rickandmortyvs.domain.usecases.episodes.GetSpecificDBEpisodeUseCase
+import com.example.rickandmortyvs.domain.usecases.episodes.GetSpecificRestEpisodeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,18 +20,18 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class LocationDetailsViewModel @Inject constructor(
-    private val getSpecificDBLocationDetailsUseCase: GetSpecificDBLocationDetailsUseCase,
-    private val getSpecificRestLocationDetailsUseCase: GetSpecificRestLocationDetailsUseCase,
+class EpisodeDetailsViewModel @Inject constructor(
+    private val getSpecificDBEpisodeUseCase: GetSpecificDBEpisodeUseCase,
+    private val getSpecificRestEpisodeUseCase: GetSpecificRestEpisodeUseCase,
     private val getMultipleRestCharactersUseCase: GetMultipleRestCharactersUseCase,
     private val getMultipleDBCharactersUseCase: GetMultipleDBCharactersUseCase
 ) :ViewModel() {
 
-    private val _charactersStateFlow = MutableStateFlow<List<Characters>?>(emptyList())
-    val charactersStateFlow: StateFlow<List<Characters>?> = _charactersStateFlow
-
     private val _networkStateFlow = MutableStateFlow(false)
     private val networkStateFlow: StateFlow<Boolean> = _networkStateFlow
+
+    private val _charactersStateFlow = MutableStateFlow<List<Characters>?>(emptyList())
+    val charactersStateFlow: StateFlow<List<Characters>?> = _charactersStateFlow
 
     fun checkNetworkAvailability(context: Context) {
         viewModelScope.launch {
@@ -59,25 +59,25 @@ class LocationDetailsViewModel @Inject constructor(
     }
 
 
-    suspend fun getLocationDetails(id: Int) : LocationDetails? {
+    suspend fun getEpisodeDetails(id: Int) : Episode? {
         return withContext(Dispatchers.IO) {
             if (networkStateFlow.value) {
-                getLocationDetailsFromApi(id)
+                getEpisodeFromApi(id)
             } else {
-                getLocationDetailsFromDB(id)
+                getEpisodeFromDB(id)
             }
         }
     }
 
-    private suspend fun getLocationDetailsFromApi(id: Int): LocationDetails?{
+    private suspend fun getEpisodeFromApi(id: Int): Episode?{
         return withContext(Dispatchers.IO){
-            getSpecificRestLocationDetailsUseCase.invoke(id).getOrNull()
+            getSpecificRestEpisodeUseCase.invoke(id).getOrNull()
         }
     }
 
-    private suspend fun getLocationDetailsFromDB(id: Int) : LocationDetails?{
+    private suspend fun getEpisodeFromDB(id: Int) : Episode?{
         return withContext(Dispatchers.IO){
-            getSpecificDBLocationDetailsUseCase.invoke(id).getOrNull()
+            getSpecificDBEpisodeUseCase.invoke(id).getOrNull()
         }
 
     }

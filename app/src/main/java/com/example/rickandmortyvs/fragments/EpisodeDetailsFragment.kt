@@ -11,26 +11,26 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.rickandmortyvs.adapters.locations.LocationsDetailsAdapter
-import com.example.rickandmortyvs.databinding.FragmentLocationDetailsBinding
-import com.example.rickandmortyvs.domain.models.locations.LocationDetails
+import com.example.rickandmortyvs.databinding.FragmentEpisodeDetailsBinding
+import com.example.rickandmortyvs.domain.models.episodes.Episode
 import com.example.rickandmortyvs.fragments.delegates.viewBinding
-import com.example.rickandmortyvs.viewmodels.location.LocationDetailsViewModel
+import com.example.rickandmortyvs.viewmodels.episode.EpisodeDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LocationDetailsFragment : Fragment() {
-    private val binding by viewBinding(FragmentLocationDetailsBinding::inflate)
+class EpisodeDetailsFragment : Fragment() {
+    private val binding by viewBinding(FragmentEpisodeDetailsBinding::inflate)
 
-    private val viewModel: LocationDetailsViewModel by viewModels()
+    private val viewModel: EpisodeDetailsViewModel by viewModels()
 
     private val adapter = LocationsDetailsAdapter {
-        findNavController().navigate(LocationDetailsFragmentDirections.actionLocationDetailsFragmentToCharacterDetailsFragment(it.id))
+        findNavController().navigate(EpisodeDetailsFragmentDirections.actionEpisodeDetailsFragmentToCharacterDetailsFragment(it.id))
     }
 
-    private val args by navArgs<LocationDetailsFragmentArgs>()
+    private val args by navArgs<EpisodeDetailsFragmentArgs>()
 
-    var params: LocationDetails? = null
+    var params: Episode? = null
 
 
     override fun onCreateView(
@@ -41,29 +41,28 @@ class LocationDetailsFragment : Fragment() {
 
         viewModel.checkNetworkAvailability(requireContext())
         viewLifecycleOwner.lifecycleScope.launch {
-            params = viewModel.getLocationDetails(args.id)
+            params = viewModel.getEpisodeDetails(args.id)
             with(binding){
-                locationDetailsNameText.text = params?.name
-                locationDetailsDimensionText.text = params?.dimension
-                locationDetailsTypeText.text = params?.type
+                episodeDetailsNameText.text = params?.name
+                episodeDetailsEpisodeCodeText.text = params?.episode
+                episodeDetailsAirDateText.text = params?.airDate
                 toolbar.title = params?.name
             }
-            viewModel.getMultipleCharacters(params?.residents)
+            viewModel.getMultipleCharacters(params?.characters)
 
         }
-        displayEpisodesRecyclerView()
+        displayCharactersRecyclerView()
 
         binding.toolbar.setOnClickListener { findNavController().popBackStack() }
 
         return binding.root
     }
 
-    private fun displayEpisodesRecyclerView(){
+    private fun displayCharactersRecyclerView(){
         with(binding){
             verticalRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
             viewLifecycleOwner.lifecycleScope.launch {
                 verticalRecyclerView.adapter=adapter
-
                 viewModel.charactersStateFlow.collect {
                     adapter.submitList(it)
                 }

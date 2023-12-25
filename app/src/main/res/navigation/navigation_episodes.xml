@@ -10,6 +10,32 @@
         android:name="com.example.rickandmortyvs.fragments.EpisodesFragment"
         android:label="fragment_episodes"
         tools:layout="@layout/fragment_episodes">
+        <action
+            android:id="@+id/action_episodesFragment_to_episodesDetailsFragment"
+            app:destination="@id/episodeDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/episodeDetailsFragment"
+        android:name="com.example.rickandmortyvs.fragments.EpisodeDetailsFragment"
+        android:label="fragment_episode_details"
+        tools:layout="@layout/fragment_episode_details">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_episodeDetailsFragment_to_characterDetailsFragment"
+            app:destination="@id/characterDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/characterDetailsFragment"
+        android:name="com.example.rickandmortyvs.fragments.CharacterDetailsFragment"
+        android:label="fragment_episode_details"
+        tools:layout="@layout/fragment_character_details">
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

@@ -2,8 +2,10 @@ package com.example.rickandmortyvs.di
 
 import com.example.rickandmortyvs.data.network.api.RickAndMortyApi
 import com.example.rickandmortyvs.domain.mappers.db.DBCharacterMapper
+import com.example.rickandmortyvs.domain.mappers.db.episode.DBEpisodeMapper
 import com.example.rickandmortyvs.domain.mappers.db.location.DBLocationDetailsMapper
 import com.example.rickandmortyvs.domain.mappers.rest.RestCharacterMapper
+import com.example.rickandmortyvs.domain.mappers.rest.episode.RestEpisodeMapper
 import com.example.rickandmortyvs.domain.mappers.rest.location.RestLocationDetailsMapper
 import dagger.Module
 import dagger.Provides
@@ -42,4 +44,17 @@ class AppModule {
     fun provideDBLocationDetailsMapper(): DBLocationDetailsMapper {
         return DBLocationDetailsMapper()
     }
+
+    @Provides
+    @Singleton
+    fun provideRestEpisodeMapper(): RestEpisodeMapper {
+        return RestEpisodeMapper()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDBEpisodeMapper(): DBEpisodeMapper {
+        return DBEpisodeMapper()
+    }
+
 }

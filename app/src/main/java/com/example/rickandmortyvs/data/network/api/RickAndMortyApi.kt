@@ -1,6 +1,7 @@
 package com.example.rickandmortyvs.data.network.api
 
 import com.example.rickandmortyvs.data.network.models.RestCharactersList
+import com.example.rickandmortyvs.data.network.models.episodes.RestEpisodesList
 import com.example.rickandmortyvs.data.network.models.locations.RestLocationsList
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -44,6 +45,7 @@ interface RickAndMortyApi {
     ): Response<List<RestLocationsList.RestLocationDetails>>
 
 
+
     @GET("api/location")
     suspend fun getLocationsList(
         @Query("page") page: Int,
@@ -52,8 +54,23 @@ interface RickAndMortyApi {
         @Query("dimension") dimension: String?
     ): Response<RestLocationsList>
 
+    @GET("api/episode")
+    suspend fun getEpisodesList(
+        @Query("page") page: Int,
+        @Query("name") name: String?,
+        @Query("episode") episode: String?
+    ): Response<RestEpisodesList>
 
 
+    @GET("api/episode/{id}")
+    suspend fun getSpecificEpisode(
+        @Path("id") id: Int
+    ): Response<RestEpisodesList.RestEpisode>
+
+    @GET("api/episode/{ids}")
+    suspend fun getMultipleEpisodes(
+        @Path("ids") ids: String
+    ): Response<List<RestEpisodesList.RestEpisode>>
 
 
     companion object {

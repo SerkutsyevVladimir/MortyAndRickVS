@@ -194,6 +194,7 @@ class CharactersFragment : Fragment() {
                 }
 
                 searchSetup()
+                searchAndFilterParamsCleaning()
 
                 searchBottomSheetBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
 
@@ -203,6 +204,8 @@ class CharactersFragment : Fragment() {
                     searchSetup()
 
                     searchBottomSheetBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
+
+                    searchAndFilterParamsCleaning()
                 }
 
             }
@@ -224,11 +227,7 @@ class CharactersFragment : Fragment() {
                 if (searchText.isNotEmpty()) {
                     viewModel.setSearchParameters(charactersSearchOptions, searchText)
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Please, enter some data into the search field",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    viewModel.setSearchParameters(charactersSearchOptions, "")
                 }
             }
         }

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.rickandmortyvs.data.database.AppDatabase
 import com.example.rickandmortyvs.data.database.dao.CharactersDao
+import com.example.rickandmortyvs.data.database.dao.episode.EpisodesDao
 import com.example.rickandmortyvs.data.database.dao.location.LocationsDao
 import dagger.Module
 import dagger.Provides
@@ -37,6 +38,12 @@ class DatabaseModule {
     fun provideLocationsDao(appDatabase: AppDatabase): LocationsDao {
         return appDatabase.getLocationsDao()
     }
+
+    @Provides
+    fun provideEpisodesDao(appDatabase: AppDatabase): EpisodesDao {
+        return appDatabase.getEpisodesDao()
+    }
+
 
     companion object {
         private const val DB_NAME = "rick_and_morty_vs_app_database.db"
