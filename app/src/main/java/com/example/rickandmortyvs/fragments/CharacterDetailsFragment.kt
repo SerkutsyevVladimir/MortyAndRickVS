@@ -26,12 +26,16 @@ class CharacterDetailsFragment : Fragment() {
     private val viewModel: CharacterDetailsViewModel by viewModels()
 
     private val adapter = CharactersDetailsAdapter {
-        findNavController().navigate(CharacterDetailsFragmentDirections.actionCharacterDetailsFragmentToEpisodesDetailsFragment(it.id))
+        findNavController().navigate(
+            CharacterDetailsFragmentDirections.actionCharacterDetailsFragmentToEpisodesDetailsFragment(
+                it.id
+            )
+        )
     }
 
     private val args by navArgs<CharacterDetailsFragmentArgs>()
 
-     var params: Characters? = null
+    var params: Characters? = null
 
 
     override fun onCreateView(
@@ -42,8 +46,8 @@ class CharacterDetailsFragment : Fragment() {
 
         viewModel.checkNetworkAvailability(requireContext())
         viewLifecycleOwner.lifecycleScope.launch {
-           params = viewModel.getCharacter(args.id)
-            with(binding){
+            params = viewModel.getCharacter(args.id)
+            with(binding) {
                 charactersDetailsNameText.text = params?.name
                 charactersDetailsSpeciesText.text = params?.species
                 charactersDetailsGenderText.text = params?.gender
@@ -57,33 +61,24 @@ class CharacterDetailsFragment : Fragment() {
                 toolbar.title = params?.name
             }
             viewModel.getMultipleEpisodes(params?.episode)
-            redirectionToLocationDetails(params)
-            redirectionToOriginDetails(params)
 
+            redirectionToOriginDetails(params)
+            redirectionToLocationDetails(params)
         }
         displayEpisodesRecyclerView()
-
 
         binding.toolbar.setOnClickListener { findNavController().popBackStack() }
         redirectionToLocationDetails(params)
         redirectionToOriginDetails(params)
 
-
-
-
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    private fun displayEpisodesRecyclerView(){
-        with(binding){
+    private fun displayEpisodesRecyclerView() {
+        with(binding) {
             verticalRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             viewLifecycleOwner.lifecycleScope.launch {
-                verticalRecyclerView.adapter=adapter
+                verticalRecyclerView.adapter = adapter
 
                 viewModel.episodeStateFlow.collect {
                     adapter.submitList(it)
@@ -92,9 +87,10 @@ class CharacterDetailsFragment : Fragment() {
         }
     }
 
-    private fun redirectionToLocationDetails(params: Characters?){
-        val locationId = params?.location?.url?.split("/")?.last()?.toInt()
-        if (locationId != null) {
+    private fun redirectionToLocationDetails(params: Characters?) {
+        val paramsUrl = params?.location?.url
+        if (!paramsUrl.isNullOrEmpty() && paramsUrl.isNotBlank()) {
+            val locationId = params.location.url.split("/").last().toInt()
             binding.charactersDetailsLocationText.setOnClickListener {
                 findNavController().navigate(
                     CharacterDetailsFragmentDirections.actionCharacterDetailsFragmentToLocationDetailsFragment(
@@ -105,9 +101,10 @@ class CharacterDetailsFragment : Fragment() {
         }
     }
 
-    private fun redirectionToOriginDetails(params: Characters?){
-        val originId = params?.origin?.url?.split("/")?.last()?.toInt()
-        if (originId != null) {
+    private fun redirectionToOriginDetails(params: Characters?) {
+        val paramsUrl = params?.origin?.url
+        if (!paramsUrl.isNullOrEmpty() && paramsUrl.isNotBlank()) {
+            val originId = params.origin.url.split("/").last().toInt()
             binding.charactersDetailsOriginText.setOnClickListener {
                 findNavController().navigate(
                     CharacterDetailsFragmentDirections.actionCharacterDetailsFragmentToLocationDetailsFragment(
@@ -116,6 +113,7 @@ class CharacterDetailsFragment : Fragment() {
                 )
             }
         }
+
     }
 
 

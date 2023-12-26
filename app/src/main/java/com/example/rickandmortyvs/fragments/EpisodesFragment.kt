@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -62,31 +61,25 @@ class EpisodesFragment : Fragment() {
 
     private fun getData() {
         with(binding) {
-
-
             adapter.addLoadStateListener { combinedLoadStates ->
                 if (combinedLoadStates.refresh is LoadState.Loading) {
                     progressBar.visibility = View.VISIBLE
                     placeHolderTextView.visibility = View.GONE
                 } else if (adapter.itemCount == 0) {
+                    progressBar.visibility = View.GONE
                     placeHolderTextView.visibility = View.VISIBLE
                     verticalRecyclerView.visibility = View.GONE
                 } else if (combinedLoadStates.append is LoadState.Error || combinedLoadStates.refresh is LoadState.Error) {
+                    progressBar.visibility = View.GONE
                     placeHolderTextView.visibility = View.VISIBLE
-                    verticalRecyclerView.visibility = View.GONE
-                    Toast.makeText(
-                        requireContext(),
-                        "Ups...Something goes wrong",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    verticalRecyclerView.visibility = View.VISIBLE
                 } else {
+                    progressBar.visibility = View.GONE
                     verticalRecyclerView.visibility = View.VISIBLE
                     placeHolderTextView.visibility = View.GONE
                 }
             }
 
-
-            //verticalRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.getEpisodesList().collectLatest {
                     adapter.submitData(it)

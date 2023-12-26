@@ -84,6 +84,13 @@ class CharactersRepositoryImpl @Inject constructor(
 
     override suspend fun getMultipleRestCharacters(ids: List<Int>): List<Characters>? {
         return if (ids.isNotEmpty()) {
+            if (ids.size==1){
+                val restCharacter = rickAndMortyApi.getSpecificCharacter(ids[0]).body()
+                if (restCharacter != null){
+                    appDatabase.getCharactersDao().addSpecificCharacter(restCharacterMapper.mapToDBModel(restCharacter))
+                    return mutableListOf( restCharacterMapper.map(restCharacter))
+                }
+            }
             val restCharacters = rickAndMortyApi.getMultipleCharacters(ids.joinToString(",")).body()
             if (restCharacters != null) {
                 appDatabase.getCharactersDao()

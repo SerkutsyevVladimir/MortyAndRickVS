@@ -61,7 +61,15 @@ class EpisodesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMultipleRestEpisodes(ids: List<Int>): List<Episode>? {
+
         return if (ids.isNotEmpty()) {
+            if (ids.size==1){
+                val restEpisode = rickAndMortyApi.getSpecificEpisode(ids[0]).body()
+                if (restEpisode != null){
+                    appDatabase.getEpisodesDao().addSpecificEpisode(restEpisodeMapper.mapToDBModel(restEpisode))
+                   return mutableListOf( restEpisodeMapper.map(restEpisode))
+                }
+            }  
             val restEpisodes = rickAndMortyApi.getMultipleEpisodes(ids.joinToString(",")).body()
             if (restEpisodes != null) {
                 appDatabase.getEpisodesDao()
@@ -71,7 +79,7 @@ class EpisodesRepositoryImpl @Inject constructor(
                 null
             }
         } else {
-            null
+           return null
         }
 
     }
