@@ -2,7 +2,7 @@ package com.example.rickandmortyvs.data.network.models.locations
 
 import com.google.gson.annotations.SerializedName
 
-data class RestLocationsList (
+data class RestLocationsList(
     val info: RestLocationsListInfo,
     val results: List<RestLocationDetails>
 ) {

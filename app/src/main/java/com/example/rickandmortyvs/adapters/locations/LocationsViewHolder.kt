@@ -10,7 +10,7 @@ class LocationsViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(location: LocationDetails?) = with(binding) {
-        if (location!=null) {
+        if (location != null) {
             locationsName.text = location.name
             locationsDimension.text = location.dimension
             locationsType.text = location.type

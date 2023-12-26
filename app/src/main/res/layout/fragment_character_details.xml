@@ -1,106 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:title="Character"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/charactersDetailsImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="?attr/homeAsUpIndicator"
-        />
+        app:title="Character" />
 
     <ImageView
+        android:id="@+id/charactersDetailsImageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toTopOf="@id/textInfoLayout"
-        android:id="@+id/charactersDetailsImageView"
-        android:src="@drawable/ic_launcher_background"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <LinearLayout
         android:id="@+id/textInfoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/verticalRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/verticalRecyclerView"
-        app:layout_constraintTop_toBottomOf="@id/charactersDetailsImageView"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@id/charactersDetailsImageView">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
             android:id="@+id/charactersDetailsNameText"
-            android:layout_gravity="center_horizontal"
-            android:textSize="25sp"
-            />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Species"
+            android:layout_gravity="center_horizontal"
+            android:text="Name"
+            android:textSize="25sp" />
+
+        <TextView
             android:id="@+id/charactersDetailsSpeciesText"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gender"
+            android:layout_gravity="center_horizontal"
+            android:text="Species"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/charactersDetailsGenderText"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status"
+            android:layout_gravity="center_horizontal"
+            android:text="Gender"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/charactersDetailsStatusText"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type"
+            android:layout_gravity="center_horizontal"
+            android:text="Status"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/charactersDetailsTypeText"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Origin"
+            android:layout_gravity="center_horizontal"
+            android:text="Type"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/charactersDetailsOriginText"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location"
-            android:id="@+id/charactersDetailsLocationText"
             android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            android:layout_marginBottom="20dp"
+            android:text="Origin"
             android:textColor="@color/black"
-            />
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/charactersDetailsLocationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:text="Location"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -112,12 +104,12 @@
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@id/textInfoLayout"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInfoLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

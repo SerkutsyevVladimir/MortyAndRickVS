@@ -8,113 +8,111 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:title="Characters"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/actionsLinearLayout"
-        />
-    
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Characters" />
 
 
     <LinearLayout
         android:id="@+id/actionsLinearLayout"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <Button
             android:id="@+id/searchParams"
-            android:layout_gravity="center"
             android:layout_width="70dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:text="Search params"
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
         <EditText
             android:id="@+id/searchField"
             android:layout_width="180dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:hint="Search..."/>
+            android:hint="Search..." />
 
 
         <Button
             android:id="@+id/searchButton"
-            android:layout_gravity="center"
             android:layout_width="65dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:text="Search"
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/filterButton"
-            android:layout_gravity="center"
             android:layout_width="65dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:text="Filters"
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
 
-</LinearLayout>
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actionsLinearLayout"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionsLinearLayout" />
 
     <TextView
         android:id="@+id/placeHolderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
         android:text="No data to display"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actionsLinearLayout"
+        android:textSize="30dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionsLinearLayout" />
 
 
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/swipeRefreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/actionsLinearLayout">
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/verticalRecyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:clipToPadding="false"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionsLinearLayout">
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/verticalRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clipToPadding="false"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/filterCordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/filtersBottomSheet"
@@ -124,118 +122,118 @@
             android:orientation="vertical"
             app:behavior_hideable="true"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="FILTERS"
-            android:textSize="20sp"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status"
-            android:textSize="15sp"
-            android:layout_marginStart="10dp"/>
-
-        <RadioGroup
-            android:id="@+id/statusRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-
-            <RadioButton
-                android:id="@+id/StatusAliveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alive"/>
-
-            <RadioButton
-                android:id="@+id/StatusDeadButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dead"/>
-
-            <RadioButton
-                android:id="@+id/StatusUnknownButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Unknown"/>
-
-        </RadioGroup>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gender"
-            android:textSize="15sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"/>
-
-        <RadioGroup
-            android:id="@+id/genderRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-
-            <RadioButton
-                android:id="@+id/GenderFemaleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Female"/>
-
-            <RadioButton
-                android:id="@+id/GenderMaleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Male"/>
-
-            <RadioButton
-                android:id="@+id/GenderGenderlessButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Genderless"/>
-
-            <RadioButton
-                android:id="@+id/GenderUnknownButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Unknown"/>
-
-        </RadioGroup>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/filterApplyButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apply"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="40dp"/>
-
-        <Button
-            android:id="@+id/filterClearButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clear"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="40dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="FILTERS"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Status"
+                android:textSize="15sp" />
+
+            <RadioGroup
+                android:id="@+id/statusRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <RadioButton
+                    android:id="@+id/StatusAliveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alive" />
+
+                <RadioButton
+                    android:id="@+id/StatusDeadButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dead" />
+
+                <RadioButton
+                    android:id="@+id/StatusUnknownButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unknown" />
+
+            </RadioGroup>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Gender"
+                android:textSize="15sp" />
+
+            <RadioGroup
+                android:id="@+id/genderRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <RadioButton
+                    android:id="@+id/GenderFemaleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female" />
+
+                <RadioButton
+                    android:id="@+id/GenderMaleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/GenderGenderlessButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Genderless" />
+
+                <RadioButton
+                    android:id="@+id/GenderUnknownButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unknown" />
+
+            </RadioGroup>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/filterApplyButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:text="Apply"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/filterClearButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="Clear"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
@@ -246,86 +244,86 @@
         android:id="@+id/searchCordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
-    <LinearLayout
-        android:id="@+id/searchBottomSheet"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        app:behavior_hideable="true"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SEARCH PARAMS"
-            android:textSize="20sp"
-            android:layout_gravity="center"/>
-
-
-        <RadioGroup
-            android:id="@+id/searchRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-
-            <RadioButton
-                android:id="@+id/nameSearchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"/>
-
-            <RadioButton
-                android:id="@+id/speciesSearchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Species"/>
-
-            <RadioButton
-                android:id="@+id/typeSearchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Type"/>
-
-        </RadioGroup>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/searchBottomSheet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            app:behavior_hideable="true"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/searchParamsApplyButton"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apply"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginStart="40dp"/>
+                android:layout_gravity="center"
+                android:text="SEARCH PARAMS"
+                android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/searchClearButton"
+
+            <RadioGroup
+                android:id="@+id/searchRadioGroup"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <RadioButton
+                    android:id="@+id/nameSearchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name" />
+
+                <RadioButton
+                    android:id="@+id/speciesSearchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Species" />
+
+                <RadioButton
+                    android:id="@+id/typeSearchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Type" />
+
+            </RadioGroup>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Clear"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginEnd="40dp"/>
+                android:orientation="horizontal">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/searchParamsApplyButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:text="Apply"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/searchClearButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="Clear"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

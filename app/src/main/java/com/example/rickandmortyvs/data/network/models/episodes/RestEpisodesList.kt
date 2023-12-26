@@ -2,7 +2,7 @@ package com.example.rickandmortyvs.data.network.models.episodes
 
 import com.google.gson.annotations.SerializedName
 
-data class RestEpisodesList (
+data class RestEpisodesList(
     val info: RestEpisodesListInfo,
     val results: List<RestEpisode>
 ) {

@@ -45,7 +45,6 @@ interface RickAndMortyApi {
     ): Response<List<RestLocationsList.RestLocationDetails>>
 
 
-
     @GET("api/location")
     suspend fun getLocationsList(
         @Query("page") page: Int,
@@ -76,7 +75,7 @@ interface RickAndMortyApi {
     companion object {
 
         private const val BASE_URL = "https://rickandmortyapi.com/"
-    fun getInstance(): RickAndMortyApi {
+        fun getInstance(): RickAndMortyApi {
 
             val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)

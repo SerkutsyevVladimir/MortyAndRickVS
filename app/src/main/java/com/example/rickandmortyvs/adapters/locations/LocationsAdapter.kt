@@ -28,11 +28,17 @@ class LocationsAdapter(
 
     companion object {
         private val DIFF_UTIL = object : DiffUtil.ItemCallback<LocationDetails>() {
-            override fun areItemsTheSame(oldItem: LocationDetails, newItem: LocationDetails): Boolean {
+            override fun areItemsTheSame(
+                oldItem: LocationDetails,
+                newItem: LocationDetails
+            ): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: LocationDetails, newItem: LocationDetails): Boolean {
+            override fun areContentsTheSame(
+                oldItem: LocationDetails,
+                newItem: LocationDetails
+            ): Boolean {
                 return oldItem == newItem
             }
         }

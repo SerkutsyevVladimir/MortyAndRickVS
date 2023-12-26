@@ -10,7 +10,7 @@ class EpisodesViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(episode: Episode?) = with(binding) {
-        if (episode!=null) {
+        if (episode != null) {
             episodeName.text = episode.name
             episodeCode.text = episode.episode
             episodeAirDate.text = episode.airDate

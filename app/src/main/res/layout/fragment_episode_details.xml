@@ -1,58 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:title="Episode"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/textInfoLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="?attr/homeAsUpIndicator"
-        />
+        app:title="Episode" />
 
     <LinearLayout
         android:id="@+id/textInfoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:layout_marginTop="70dp"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
             android:id="@+id/episodeDetailsNameText"
-            android:layout_gravity="center_horizontal"
-            android:textSize="25sp"
-            />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Air Date"
+            android:layout_gravity="center_horizontal"
+            android:text="Name"
+            android:textSize="25sp" />
+
+        <TextView
             android:id="@+id/episodeDetailsAirDateText"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Episode Code"
-            android:id="@+id/episodeDetailsEpisodeCodeText"
             android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
+            android:text="Air Date"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/episodeDetailsEpisodeCodeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            />
+            android:text="Episode Code"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -65,12 +61,12 @@
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@id/textInfoLayout"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInfoLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

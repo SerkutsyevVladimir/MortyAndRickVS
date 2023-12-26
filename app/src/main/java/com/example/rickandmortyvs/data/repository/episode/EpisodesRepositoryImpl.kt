@@ -53,7 +53,8 @@ class EpisodesRepositoryImpl @Inject constructor(
         val response = rickAndMortyApi.getSpecificEpisode(id)
         val responseBody = response.body()
         if (response.isSuccessful && responseBody != null) {
-            appDatabase.getEpisodesDao().addSpecificEpisode(restEpisodeMapper.mapToDBModel(responseBody))
+            appDatabase.getEpisodesDao()
+                .addSpecificEpisode(restEpisodeMapper.mapToDBModel(responseBody))
             return restEpisodeMapper.map(responseBody)
         } else {
             return null
@@ -63,13 +64,14 @@ class EpisodesRepositoryImpl @Inject constructor(
     override suspend fun getMultipleRestEpisodes(ids: List<Int>): List<Episode>? {
 
         return if (ids.isNotEmpty()) {
-            if (ids.size==1){
+            if (ids.size == 1) {
                 val restEpisode = rickAndMortyApi.getSpecificEpisode(ids[0]).body()
-                if (restEpisode != null){
-                    appDatabase.getEpisodesDao().addSpecificEpisode(restEpisodeMapper.mapToDBModel(restEpisode))
-                   return mutableListOf( restEpisodeMapper.map(restEpisode))
+                if (restEpisode != null) {
+                    appDatabase.getEpisodesDao()
+                        .addSpecificEpisode(restEpisodeMapper.mapToDBModel(restEpisode))
+                    return mutableListOf(restEpisodeMapper.map(restEpisode))
                 }
-            }  
+            }
             val restEpisodes = rickAndMortyApi.getMultipleEpisodes(ids.joinToString(",")).body()
             if (restEpisodes != null) {
                 appDatabase.getEpisodesDao()
@@ -79,7 +81,7 @@ class EpisodesRepositoryImpl @Inject constructor(
                 null
             }
         } else {
-           return null
+            return null
         }
 
     }

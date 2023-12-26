@@ -4,7 +4,6 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.example.rickandmortyvs.data.database.AppDatabase
-import com.example.rickandmortyvs.data.database.dao.CharactersDao
 import com.example.rickandmortyvs.data.database.models.DBCharacter
 import com.example.rickandmortyvs.data.network.api.RickAndMortyApi
 import com.example.rickandmortyvs.data.paging.CharactersRemoteMediator
@@ -17,7 +16,6 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class CharactersRepositoryImpl @Inject constructor(
     private val rickAndMortyApi: RickAndMortyApi,
-    private val charactersDao: CharactersDao,
     private val restCharacterMapper: RestCharacterMapper,
     private val appDatabase: AppDatabase,
     private val dbCharacterMapper: DBCharacterMapper
@@ -84,11 +82,12 @@ class CharactersRepositoryImpl @Inject constructor(
 
     override suspend fun getMultipleRestCharacters(ids: List<Int>): List<Characters>? {
         return if (ids.isNotEmpty()) {
-            if (ids.size==1){
+            if (ids.size == 1) {
                 val restCharacter = rickAndMortyApi.getSpecificCharacter(ids[0]).body()
-                if (restCharacter != null){
-                    appDatabase.getCharactersDao().addSpecificCharacter(restCharacterMapper.mapToDBModel(restCharacter))
-                    return mutableListOf( restCharacterMapper.map(restCharacter))
+                if (restCharacter != null) {
+                    appDatabase.getCharactersDao()
+                        .addSpecificCharacter(restCharacterMapper.mapToDBModel(restCharacter))
+                    return mutableListOf(restCharacterMapper.map(restCharacter))
                 }
             }
             val restCharacters = rickAndMortyApi.getMultipleCharacters(ids.joinToString(",")).body()

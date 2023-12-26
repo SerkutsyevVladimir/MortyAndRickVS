@@ -56,7 +56,8 @@ class LocationDetailsRepositoryImpl @Inject constructor(
         val response = rickAndMortyApi.getSpecificLocation(id)
         val responseBody = response.body()
         if (response.isSuccessful && responseBody != null) {
-            appDatabase.getLocationsDao().addSpecificLocation(restLocationDetailsMapper.mapToDBModel(responseBody))
+            appDatabase.getLocationsDao()
+                .addSpecificLocation(restLocationDetailsMapper.mapToDBModel(responseBody))
             return restLocationDetailsMapper.map(responseBody)
         } else {
             return null

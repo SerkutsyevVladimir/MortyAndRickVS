@@ -11,7 +11,7 @@ class CharactersViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(character: Characters?) = with(binding) {
-        if (character!=null) {
+        if (character != null) {
             Glide.with(charactersImageView.context)
                 .load(character.image)
                 .into(charactersImageView)
