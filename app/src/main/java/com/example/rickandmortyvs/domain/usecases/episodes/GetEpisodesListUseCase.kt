@@ -22,6 +22,6 @@ class GetEpisodesListUseCase @Inject constructor(
             .getEpisodesList(
                 name,
                 episode
-            ).flow.map { it -> it.map { dbEpisodeMapper.map(it) }}
+            ).flow.map { it -> it.map { dbEpisodeMapper.map(it) } }
     }
 }

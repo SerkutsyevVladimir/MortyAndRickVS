@@ -8,7 +8,7 @@ class GetSpecificDBEpisodeUseCase @Inject constructor(
     private val episodeRepositoryImpl: EpisodesRepository
 ) {
 
-    suspend operator fun invoke(id: Int): Result<Episode?>{
-        return runCatching {episodeRepositoryImpl.getSpecificDBEpisode(id)}
+    suspend operator fun invoke(id: Int): Result<Episode?> {
+        return runCatching { episodeRepositoryImpl.getSpecificDBEpisode(id) }
     }
 }

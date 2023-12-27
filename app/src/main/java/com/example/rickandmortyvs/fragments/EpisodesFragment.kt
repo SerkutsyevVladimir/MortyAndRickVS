@@ -28,7 +28,11 @@ class EpisodesFragment : Fragment() {
     private val viewModel: EpisodesViewModel by viewModels()
 
     private val adapter = EpisodesAdapter {
-        findNavController().navigate(EpisodesFragmentDirections.actionEpisodesFragmentToEpisodesDetailsFragment(it.id))
+        findNavController().navigate(
+            EpisodesFragmentDirections.actionEpisodesFragmentToEpisodesDetailsFragment(
+                it.id
+            )
+        )
     }
 
     private lateinit var searchBottomSheetBehaviour: BottomSheetBehavior<LinearLayout>

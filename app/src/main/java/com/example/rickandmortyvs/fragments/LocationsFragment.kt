@@ -28,7 +28,11 @@ class LocationsFragment : Fragment() {
     private val viewModel: LocationsViewModel by viewModels()
 
     private val adapter = LocationsAdapter {
-        findNavController().navigate(LocationsFragmentDirections.actionLocationFragmentToLocationDetailsFragment(it.id))
+        findNavController().navigate(
+            LocationsFragmentDirections.actionLocationFragmentToLocationDetailsFragment(
+                it.id
+            )
+        )
     }
 
     private lateinit var searchBottomSheetBehaviour: BottomSheetBehavior<LinearLayout>

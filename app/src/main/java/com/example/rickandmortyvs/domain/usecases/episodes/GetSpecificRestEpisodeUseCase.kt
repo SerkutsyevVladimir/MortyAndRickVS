@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetSpecificRestEpisodeUseCase @Inject constructor(
     private val episodesRepositoryImpl: EpisodesRepository
 ) {
-    suspend operator fun invoke(id: Int): Result<Episode?>{
-        return runCatching {episodesRepositoryImpl.getSpecificRestEpisode(id)}
+    suspend operator fun invoke(id: Int): Result<Episode?> {
+        return runCatching { episodesRepositoryImpl.getSpecificRestEpisode(id) }
     }
 }

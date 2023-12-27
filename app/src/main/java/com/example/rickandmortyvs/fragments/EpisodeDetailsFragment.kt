@@ -25,7 +25,11 @@ class EpisodeDetailsFragment : Fragment() {
     private val viewModel: EpisodeDetailsViewModel by viewModels()
 
     private val adapter = LocationsDetailsAdapter {
-        findNavController().navigate(EpisodeDetailsFragmentDirections.actionEpisodeDetailsFragmentToCharacterDetailsFragment(it.id))
+        findNavController().navigate(
+            EpisodeDetailsFragmentDirections.actionEpisodeDetailsFragmentToCharacterDetailsFragment(
+                it.id
+            )
+        )
     }
 
     private val args by navArgs<EpisodeDetailsFragmentArgs>()
@@ -42,7 +46,7 @@ class EpisodeDetailsFragment : Fragment() {
         viewModel.checkNetworkAvailability(requireContext())
         viewLifecycleOwner.lifecycleScope.launch {
             params = viewModel.getEpisodeDetails(args.id)
-            with(binding){
+            with(binding) {
                 episodeDetailsNameText.text = params?.name
                 episodeDetailsEpisodeCodeText.text = params?.episode
                 episodeDetailsAirDateText.text = params?.airDate
@@ -58,11 +62,11 @@ class EpisodeDetailsFragment : Fragment() {
         return binding.root
     }
 
-    private fun displayCharactersRecyclerView(){
-        with(binding){
+    private fun displayCharactersRecyclerView() {
+        with(binding) {
             verticalRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
             viewLifecycleOwner.lifecycleScope.launch {
-                verticalRecyclerView.adapter=adapter
+                verticalRecyclerView.adapter = adapter
                 viewModel.charactersStateFlow.collect {
                     adapter.submitList(it)
                 }

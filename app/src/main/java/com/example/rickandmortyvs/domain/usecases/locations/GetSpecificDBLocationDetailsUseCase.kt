@@ -8,7 +8,7 @@ class GetSpecificDBLocationDetailsUseCase @Inject constructor(
     private val locationDetailsRepositoryImpl: LocationDetailsRepository
 ) {
 
-    suspend operator fun invoke(id: Int): Result<LocationDetails?>{
-        return runCatching {locationDetailsRepositoryImpl.getSpecificDBLocationDetails(id)}
+    suspend operator fun invoke(id: Int): Result<LocationDetails?> {
+        return runCatching { locationDetailsRepositoryImpl.getSpecificDBLocationDetails(id) }
     }
 }

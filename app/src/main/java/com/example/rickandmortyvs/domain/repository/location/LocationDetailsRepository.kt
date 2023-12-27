@@ -11,11 +11,11 @@ interface LocationDetailsRepository {
         type: String?
     ): Pager<Int, DBLocationDetails>
 
-    suspend fun getSpecificRestLocationDetails(id: Int) : LocationDetails?
+    suspend fun getSpecificRestLocationDetails(id: Int): LocationDetails?
 
-    suspend fun getMultipleRestLocationDetails(ids: List<Int>) : List<LocationDetails>?
+    suspend fun getMultipleRestLocationDetails(ids: List<Int>): List<LocationDetails>?
 
-    suspend fun getSpecificDBLocationDetails(id: Int) : LocationDetails?
+    suspend fun getSpecificDBLocationDetails(id: Int): LocationDetails?
 
-    suspend fun getMultipleDBLocationDetails(ids: List<Int>) : List<LocationDetails>?
+    suspend fun getMultipleDBLocationDetails(ids: List<Int>): List<LocationDetails>?
 }

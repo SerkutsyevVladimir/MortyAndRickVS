@@ -24,6 +24,6 @@ class GetLocationDetailsListUseCase @Inject constructor(
                 name,
                 dimension,
                 type
-            ).flow.map { it -> it.map { dbLocationDetailsMapper.map(it) }}
+            ).flow.map { it -> it.map { dbLocationDetailsMapper.map(it) } }
     }
 }

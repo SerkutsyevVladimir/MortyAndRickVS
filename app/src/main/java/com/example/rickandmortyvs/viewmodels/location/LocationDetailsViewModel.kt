@@ -25,7 +25,7 @@ class LocationDetailsViewModel @Inject constructor(
     private val getSpecificRestLocationDetailsUseCase: GetSpecificRestLocationDetailsUseCase,
     private val getMultipleRestCharactersUseCase: GetMultipleRestCharactersUseCase,
     private val getMultipleDBCharactersUseCase: GetMultipleDBCharactersUseCase
-) :ViewModel() {
+) : ViewModel() {
 
     private val _charactersStateFlow = MutableStateFlow<List<Characters>?>(emptyList())
     val charactersStateFlow: StateFlow<List<Characters>?> = _charactersStateFlow
@@ -59,7 +59,7 @@ class LocationDetailsViewModel @Inject constructor(
     }
 
 
-    suspend fun getLocationDetails(id: Int) : LocationDetails? {
+    suspend fun getLocationDetails(id: Int): LocationDetails? {
         return withContext(Dispatchers.IO) {
             if (networkStateFlow.value) {
                 getLocationDetailsFromApi(id)
@@ -69,22 +69,22 @@ class LocationDetailsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getLocationDetailsFromApi(id: Int): LocationDetails?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getLocationDetailsFromApi(id: Int): LocationDetails? {
+        return withContext(Dispatchers.IO) {
             getSpecificRestLocationDetailsUseCase.invoke(id).getOrNull()
         }
     }
 
-    private suspend fun getLocationDetailsFromDB(id: Int) : LocationDetails?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getLocationDetailsFromDB(id: Int): LocationDetails? {
+        return withContext(Dispatchers.IO) {
             getSpecificDBLocationDetailsUseCase.invoke(id).getOrNull()
         }
 
     }
 
-    suspend fun getMultipleCharacters(characters: List<String>?){
-        if (characters != null){
-            val ids = characters.map { characterUrl -> characterUrl.split("/").last().toInt()}
+    suspend fun getMultipleCharacters(characters: List<String>?) {
+        if (characters != null) {
+            val ids = characters.map { characterUrl -> characterUrl.split("/").last().toInt() }
             withContext(Dispatchers.IO) {
                 if (networkStateFlow.value) {
                     _charactersStateFlow.value = getMultipleCharactersFromApi(ids)
@@ -95,14 +95,14 @@ class LocationDetailsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getMultipleCharactersFromApi(ids: List<Int>): List<Characters>?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getMultipleCharactersFromApi(ids: List<Int>): List<Characters>? {
+        return withContext(Dispatchers.IO) {
             getMultipleRestCharactersUseCase.invoke(ids).getOrNull()
         }
     }
 
-    private suspend fun getMultipleCharactersFromDB(ids: List<Int>) : List<Characters>?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getMultipleCharactersFromDB(ids: List<Int>): List<Characters>? {
+        return withContext(Dispatchers.IO) {
             getMultipleDBCharactersUseCase.invoke(ids).getOrNull()
         }
 

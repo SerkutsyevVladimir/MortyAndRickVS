@@ -8,7 +8,7 @@ class GetMultipleRestCharactersUseCase @Inject constructor(
     private val charactersRepositoryImpl: CharactersRepository
 ) {
 
-    suspend operator fun invoke(ids: List<Int>): Result<List<Characters>?>{
-        return runCatching {charactersRepositoryImpl.getMultipleRestCharacters(ids)}
+    suspend operator fun invoke(ids: List<Int>): Result<List<Characters>?> {
+        return runCatching { charactersRepositoryImpl.getMultipleRestCharacters(ids) }
     }
 }

@@ -8,7 +8,7 @@ class GetMultipleRestLocationDetailsUseCase @Inject constructor(
     private val locationDetailsRepositoryImpl: LocationDetailsRepository
 ) {
 
-    suspend operator fun invoke(ids: List<Int>): Result<List<LocationDetails>?>{
-        return runCatching {locationDetailsRepositoryImpl.getMultipleRestLocationDetails(ids)}
+    suspend operator fun invoke(ids: List<Int>): Result<List<LocationDetails>?> {
+        return runCatching { locationDetailsRepositoryImpl.getMultipleRestLocationDetails(ids) }
     }
 }

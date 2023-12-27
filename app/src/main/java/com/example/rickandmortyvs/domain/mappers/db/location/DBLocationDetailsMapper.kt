@@ -4,7 +4,7 @@ import com.example.rickandmortyvs.data.database.models.location.DBLocationDetail
 import com.example.rickandmortyvs.domain.mappers.Mapper
 import com.example.rickandmortyvs.domain.models.locations.LocationDetails
 
-class DBLocationDetailsMapper: Mapper<DBLocationDetails, LocationDetails> {
+class DBLocationDetailsMapper : Mapper<DBLocationDetails, LocationDetails> {
     override fun map(input: DBLocationDetails): LocationDetails {
         return LocationDetails(
             id = input.id,

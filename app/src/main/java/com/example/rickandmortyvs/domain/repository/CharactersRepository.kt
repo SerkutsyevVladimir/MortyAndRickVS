@@ -12,14 +12,14 @@ interface CharactersRepository {
         species: String?,
         type: String?,
         gender: String?
-    ):Pager<Int,DBCharacter>
+    ): Pager<Int, DBCharacter>
 
-    suspend fun getSpecificRestCharacter(id: Int) : Characters?
+    suspend fun getSpecificRestCharacter(id: Int): Characters?
 
-    suspend fun getMultipleRestCharacters(ids: List<Int>) : List<Characters>?
+    suspend fun getMultipleRestCharacters(ids: List<Int>): List<Characters>?
 
-    suspend fun getSpecificDBCharacter(id: Int) : Characters?
+    suspend fun getSpecificDBCharacter(id: Int): Characters?
 
-    suspend fun getMultipleDBCharacters(ids: List<Int>) : List<Characters>?
+    suspend fun getMultipleDBCharacters(ids: List<Int>): List<Characters>?
 
 }

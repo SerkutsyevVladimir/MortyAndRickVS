@@ -25,7 +25,7 @@ class EpisodeDetailsViewModel @Inject constructor(
     private val getSpecificRestEpisodeUseCase: GetSpecificRestEpisodeUseCase,
     private val getMultipleRestCharactersUseCase: GetMultipleRestCharactersUseCase,
     private val getMultipleDBCharactersUseCase: GetMultipleDBCharactersUseCase
-) :ViewModel() {
+) : ViewModel() {
 
     private val _networkStateFlow = MutableStateFlow(false)
     private val networkStateFlow: StateFlow<Boolean> = _networkStateFlow
@@ -59,7 +59,7 @@ class EpisodeDetailsViewModel @Inject constructor(
     }
 
 
-    suspend fun getEpisodeDetails(id: Int) : Episode? {
+    suspend fun getEpisodeDetails(id: Int): Episode? {
         return withContext(Dispatchers.IO) {
             if (networkStateFlow.value) {
                 getEpisodeFromApi(id)
@@ -69,22 +69,22 @@ class EpisodeDetailsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getEpisodeFromApi(id: Int): Episode?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getEpisodeFromApi(id: Int): Episode? {
+        return withContext(Dispatchers.IO) {
             getSpecificRestEpisodeUseCase.invoke(id).getOrNull()
         }
     }
 
-    private suspend fun getEpisodeFromDB(id: Int) : Episode?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getEpisodeFromDB(id: Int): Episode? {
+        return withContext(Dispatchers.IO) {
             getSpecificDBEpisodeUseCase.invoke(id).getOrNull()
         }
 
     }
 
-    suspend fun getMultipleCharacters(characters: List<String>?){
-        if (characters != null){
-            val ids = characters.map { characterUrl -> characterUrl.split("/").last().toInt()}
+    suspend fun getMultipleCharacters(characters: List<String>?) {
+        if (characters != null) {
+            val ids = characters.map { characterUrl -> characterUrl.split("/").last().toInt() }
             withContext(Dispatchers.IO) {
                 if (networkStateFlow.value) {
                     _charactersStateFlow.value = getMultipleCharactersFromApi(ids)
@@ -95,14 +95,14 @@ class EpisodeDetailsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getMultipleCharactersFromApi(ids: List<Int>): List<Characters>?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getMultipleCharactersFromApi(ids: List<Int>): List<Characters>? {
+        return withContext(Dispatchers.IO) {
             getMultipleRestCharactersUseCase.invoke(ids).getOrNull()
         }
     }
 
-    private suspend fun getMultipleCharactersFromDB(ids: List<Int>) : List<Characters>?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getMultipleCharactersFromDB(ids: List<Int>): List<Characters>? {
+        return withContext(Dispatchers.IO) {
             getMultipleDBCharactersUseCase.invoke(ids).getOrNull()
         }
 

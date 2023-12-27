@@ -8,7 +8,7 @@ class GetMultipleRestEpisodesUseCase @Inject constructor(
     private val episodesRepositoryImpl: EpisodesRepository
 ) {
 
-    suspend operator fun invoke(ids: List<Int>): Result<List<Episode>?>{
-        return runCatching {episodesRepositoryImpl.getMultipleRestEpisodes(ids)}
+    suspend operator fun invoke(ids: List<Int>): Result<List<Episode>?> {
+        return runCatching { episodesRepositoryImpl.getMultipleRestEpisodes(ids) }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.rickandmortyvs.domain.models
 
-data class Characters (
+data class Characters(
     val id: Int,
     val name: String,
     val status: String,

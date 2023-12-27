@@ -51,7 +51,7 @@ class EpisodeRemoteMediator(
                     // items were loaded after the initial REFRESH and there are
                     // no more items to load.
                     if (lastItem == null){
-                        1
+                        2
                     }else{
                         (lastItem.id / state.config.pageSize) + 1
                     }

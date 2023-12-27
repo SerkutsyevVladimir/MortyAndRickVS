@@ -8,7 +8,7 @@ class GetMultipleDBCharactersUseCase @Inject constructor(
     private val charactersRepositoryImpl: CharactersRepository
 ) {
 
-    suspend operator fun invoke(ids: List<Int>): Result<List<Characters>?>{
-        return runCatching {charactersRepositoryImpl.getMultipleDBCharacters(ids)}
+    suspend operator fun invoke(ids: List<Int>): Result<List<Characters>?> {
+        return runCatching { charactersRepositoryImpl.getMultipleDBCharacters(ids) }
     }
 }

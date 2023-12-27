@@ -10,11 +10,11 @@ interface EpisodesRepository {
         episode: String?
     ): Pager<Int, DBEpisode>
 
-    suspend fun getSpecificRestEpisode(id: Int) : Episode?
+    suspend fun getSpecificRestEpisode(id: Int): Episode?
 
-    suspend fun getMultipleRestEpisodes(ids: List<Int>) : List<Episode>?
+    suspend fun getMultipleRestEpisodes(ids: List<Int>): List<Episode>?
 
-    suspend fun getSpecificDBEpisode(id: Int) : Episode?
+    suspend fun getSpecificDBEpisode(id: Int): Episode?
 
-    suspend fun getMultipleDBEpisodes(ids: List<Int>) : List<Episode>?
+    suspend fun getMultipleDBEpisodes(ids: List<Int>): List<Episode>?
 }

@@ -25,7 +25,7 @@ class CharacterDetailsViewModel @Inject constructor(
     private val getSpecificRestCharacterUseCase: GetSpecificRestCharacterUseCase,
     private val getMultipleRestEpisodesUseCase: GetMultipleRestEpisodesUseCase,
     private val getMultipleDBEpisodesUseCase: GetMultipleDBEpisodesUseCase
-) :ViewModel() {
+) : ViewModel() {
 
     private val _networkStateFlow = MutableStateFlow(false)
     private val networkStateFlow: StateFlow<Boolean> = _networkStateFlow
@@ -62,7 +62,7 @@ class CharacterDetailsViewModel @Inject constructor(
     }
 
 
-    suspend fun getCharacter(id: Int) : Characters? {
+    suspend fun getCharacter(id: Int): Characters? {
         return withContext(Dispatchers.IO) {
             if (networkStateFlow.value) {
                 getCharacterFromApi(id)
@@ -72,40 +72,40 @@ class CharacterDetailsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getCharacterFromApi(id: Int): Characters?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getCharacterFromApi(id: Int): Characters? {
+        return withContext(Dispatchers.IO) {
             getSpecificRestCharacterUseCase.invoke(id).getOrNull()
         }
     }
 
-    private suspend fun getCharacterFromDB(id: Int) : Characters?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getCharacterFromDB(id: Int): Characters? {
+        return withContext(Dispatchers.IO) {
             getSpecificDBCharacterUseCase.invoke(id).getOrNull()
         }
 
     }
 
-    suspend fun getMultipleEpisodes(episodes: List<String>?){
-        if (episodes != null){
-        val ids = episodes.map { episodeUrl -> episodeUrl.split("/").last().toInt()}
-        withContext(Dispatchers.IO) {
-            if (networkStateFlow.value) {
-                _episodesStateFlow.value = getMultipleEpisodesFromApi(ids)
-            } else {
-                _episodesStateFlow.value = getMultipleEpisodesFromDB(ids)
+    suspend fun getMultipleEpisodes(episodes: List<String>?) {
+        if (episodes != null) {
+            val ids = episodes.map { episodeUrl -> episodeUrl.split("/").last().toInt() }
+            withContext(Dispatchers.IO) {
+                if (networkStateFlow.value) {
+                    _episodesStateFlow.value = getMultipleEpisodesFromApi(ids)
+                } else {
+                    _episodesStateFlow.value = getMultipleEpisodesFromDB(ids)
+                }
             }
-        }
         }
     }
 
-    private suspend fun getMultipleEpisodesFromApi(ids: List<Int>): List<Episode>?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getMultipleEpisodesFromApi(ids: List<Int>): List<Episode>? {
+        return withContext(Dispatchers.IO) {
             getMultipleRestEpisodesUseCase.invoke(ids).getOrNull()
         }
     }
 
-    private suspend fun getMultipleEpisodesFromDB(ids: List<Int>) : List<Episode>?{
-        return withContext(Dispatchers.IO){
+    private suspend fun getMultipleEpisodesFromDB(ids: List<Int>): List<Episode>? {
+        return withContext(Dispatchers.IO) {
             getMultipleDBEpisodesUseCase.invoke(ids).getOrNull()
         }
 

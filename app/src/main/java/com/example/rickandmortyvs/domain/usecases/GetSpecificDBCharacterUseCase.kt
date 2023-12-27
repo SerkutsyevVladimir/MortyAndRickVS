@@ -8,7 +8,7 @@ class GetSpecificDBCharacterUseCase @Inject constructor(
     private val charactersRepositoryImpl: CharactersRepository
 ) {
 
-    suspend operator fun invoke(id: Int): Result<Characters?>{
-       return runCatching {charactersRepositoryImpl.getSpecificDBCharacter(id)}
+    suspend operator fun invoke(id: Int): Result<Characters?> {
+        return runCatching { charactersRepositoryImpl.getSpecificDBCharacter(id) }
     }
 }

@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetSpecificRestLocationDetailsUseCase @Inject constructor(
     private val locationDetailsRepositoryImpl: LocationDetailsRepository
 ) {
-    suspend operator fun invoke(id: Int): Result<LocationDetails?>{
-        return runCatching {locationDetailsRepositoryImpl.getSpecificRestLocationDetails(id)}
+    suspend operator fun invoke(id: Int): Result<LocationDetails?> {
+        return runCatching { locationDetailsRepositoryImpl.getSpecificRestLocationDetails(id) }
     }
 }

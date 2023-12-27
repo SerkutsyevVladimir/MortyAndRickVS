@@ -9,7 +9,7 @@ import com.example.rickandmortyvs.domain.models.Characters
 import com.example.rickandmortyvs.domain.models.Location
 import com.example.rickandmortyvs.domain.models.Origin
 
-class RestCharacterMapper: Mapper<RestCharactersList.RestCharacter,Characters> {
+class RestCharacterMapper : Mapper<RestCharactersList.RestCharacter, Characters> {
     override fun map(input: RestCharactersList.RestCharacter): Characters {
         return Characters(
             id = input.id,
@@ -33,7 +33,7 @@ class RestCharacterMapper: Mapper<RestCharactersList.RestCharacter,Characters> {
         )
     }
 
-    fun mapToDBModel(input: RestCharactersList.RestCharacter): DBCharacter{
+    fun mapToDBModel(input: RestCharactersList.RestCharacter): DBCharacter {
         return DBCharacter(
             id = input.id,
             name = input.name,

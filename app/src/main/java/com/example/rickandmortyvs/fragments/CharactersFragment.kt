@@ -30,7 +30,11 @@ class CharactersFragment : Fragment() {
     private val viewModel: CharactersViewModel by viewModels()
 
     private val adapter = CharactersAdapter {
-        findNavController().navigate(CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailsFragment(it.id))
+        findNavController().navigate(
+            CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailsFragment(
+                it.id
+            )
+        )
     }
 
     private lateinit var bottomSheetBehaviour: BottomSheetBehavior<LinearLayout>

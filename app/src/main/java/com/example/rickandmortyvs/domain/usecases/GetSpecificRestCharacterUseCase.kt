@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetSpecificRestCharacterUseCase @Inject constructor(
     private val charactersRepositoryImpl: CharactersRepository
 ) {
-    suspend operator fun invoke(id: Int): Result<Characters?>{
-        return runCatching {charactersRepositoryImpl.getSpecificRestCharacter(id)}
+    suspend operator fun invoke(id: Int): Result<Characters?> {
+        return runCatching { charactersRepositoryImpl.getSpecificRestCharacter(id) }
     }
 }

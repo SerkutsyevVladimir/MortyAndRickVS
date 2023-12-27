@@ -28,7 +28,7 @@ class GetCharactersListUseCase @Inject constructor(
                 species,
                 type,
                 gender
-            ).flow.map { it -> it.map { dbCharacterMapper.map(it) }}
-        }
+            ).flow.map { it -> it.map { dbCharacterMapper.map(it) } }
     }
+}
 
