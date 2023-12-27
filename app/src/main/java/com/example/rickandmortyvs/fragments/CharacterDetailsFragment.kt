@@ -35,7 +35,7 @@ class CharacterDetailsFragment : Fragment() {
 
     private val args by navArgs<CharacterDetailsFragmentArgs>()
 
-    var params: Characters? = null
+    var character: Characters? = null
 
 
     override fun onCreateView(
@@ -45,31 +45,11 @@ class CharacterDetailsFragment : Fragment() {
     ): View {
 
         viewModel.checkNetworkAvailability(requireContext())
-        viewLifecycleOwner.lifecycleScope.launch {
-            params = viewModel.getCharacter(args.id)
-            with(binding) {
-                charactersDetailsNameText.text = params?.name
-                charactersDetailsSpeciesText.text = params?.species
-                charactersDetailsGenderText.text = params?.gender
-                charactersDetailsStatusText.text = params?.status
-                charactersDetailsTypeText.text = params?.type
-                charactersDetailsOriginText.text = params?.origin?.name
-                charactersDetailsLocationText.text = params?.location?.name
-                Glide.with(charactersDetailsImageView.context)
-                    .load(params?.image)
-                    .into(charactersDetailsImageView)
-                toolbar.title = params?.name
-            }
-            viewModel.getMultipleEpisodes(params?.episode)
-
-            redirectionToOriginDetails(params)
-            redirectionToLocationDetails(params)
-        }
+        uiInitialization()
         displayEpisodesRecyclerView()
-
         binding.toolbar.setOnClickListener { findNavController().popBackStack() }
-        redirectionToLocationDetails(params)
-        redirectionToOriginDetails(params)
+        redirectionToLocationDetails(character)
+        redirectionToOriginDetails(character)
 
         return binding.root
     }
@@ -114,6 +94,29 @@ class CharacterDetailsFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun uiInitialization() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            character = viewModel.getCharacter(args.id)
+            with(binding) {
+                charactersDetailsNameText.text = character?.name
+                charactersDetailsSpeciesText.text = character?.species
+                charactersDetailsGenderText.text = character?.gender
+                charactersDetailsStatusText.text = character?.status
+                charactersDetailsTypeText.text = character?.type
+                charactersDetailsOriginText.text = character?.origin?.name
+                charactersDetailsLocationText.text = character?.location?.name
+                Glide.with(charactersDetailsImageView.context)
+                    .load(character?.image)
+                    .into(charactersDetailsImageView)
+                toolbar.title = character?.name
+            }
+            viewModel.getMultipleEpisodes(character?.episode)
+
+            redirectionToOriginDetails(character)
+            redirectionToLocationDetails(character)
+        }
     }
 
 

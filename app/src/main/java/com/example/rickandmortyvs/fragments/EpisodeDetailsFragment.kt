@@ -34,7 +34,7 @@ class EpisodeDetailsFragment : Fragment() {
 
     private val args by navArgs<EpisodeDetailsFragmentArgs>()
 
-    var params: Episode? = null
+    private var episode: Episode? = null
 
 
     override fun onCreateView(
@@ -44,19 +44,8 @@ class EpisodeDetailsFragment : Fragment() {
     ): View {
 
         viewModel.checkNetworkAvailability(requireContext())
-        viewLifecycleOwner.lifecycleScope.launch {
-            params = viewModel.getEpisodeDetails(args.id)
-            with(binding) {
-                episodeDetailsNameText.text = params?.name
-                episodeDetailsEpisodeCodeText.text = params?.episode
-                episodeDetailsAirDateText.text = params?.airDate
-                toolbar.title = params?.name
-            }
-            viewModel.getMultipleCharacters(params?.characters)
-
-        }
+        uiInitialization()
         displayCharactersRecyclerView()
-
         binding.toolbar.setOnClickListener { findNavController().popBackStack() }
 
         return binding.root
@@ -71,6 +60,20 @@ class EpisodeDetailsFragment : Fragment() {
                     adapter.submitList(it)
                 }
             }
+        }
+    }
+
+    private fun uiInitialization(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            episode = viewModel.getEpisodeDetails(args.id)
+            with(binding) {
+                episodeDetailsNameText.text = episode?.name
+                episodeDetailsEpisodeCodeText.text = episode?.episode
+                episodeDetailsAirDateText.text = episode?.airDate
+                toolbar.title = episode?.name
+            }
+            viewModel.getMultipleCharacters(episode?.characters)
+
         }
     }
 }

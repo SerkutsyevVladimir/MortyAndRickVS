@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.rickandmortyvs.domain.models.Characters
-import com.example.rickandmortyvs.domain.models.CharactersParameters
 import com.example.rickandmortyvs.domain.models.CharactersSearchOptions
 import com.example.rickandmortyvs.domain.models.Gender
 import com.example.rickandmortyvs.domain.models.SearchParameters
@@ -17,7 +16,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,18 +38,6 @@ class CharactersViewModel @Inject constructor(
     private val _genderStateFlow = MutableStateFlow(Gender.EMPTY)
     val genderStateFlow: StateFlow<Gender> = _genderStateFlow
 
-    private val _charactersStateFlow = MutableStateFlow(CharactersParameters())
-    val charactersStateFlow: StateFlow<CharactersParameters> = _charactersStateFlow
-
-    init {
-        viewModelScope.launch {
-            getCharactersList().collect {
-                _charactersStateFlow.value = _charactersStateFlow.value.copy(
-                    characters = it
-                )
-            }
-        }
-    }
 
     fun getCharactersList(): Flow<PagingData<Characters>> {
         return combine(
@@ -81,18 +67,15 @@ class CharactersViewModel @Inject constructor(
 
     fun addGenderFilter(gender: Gender) {
         _genderStateFlow.value = gender
-        _charactersStateFlow.value = _charactersStateFlow.value.copy(isFilteringEnabled = true)
     }
 
     fun addStatusFilter(status: Status) {
         _statusStateFlow.value = status
-        _charactersStateFlow.value = _charactersStateFlow.value.copy(isFilteringEnabled = true)
     }
 
     fun removeFilters() {
         _genderStateFlow.value = Gender.EMPTY
         _statusStateFlow.value = Status.EMPTY
-        _charactersStateFlow.value = _charactersStateFlow.value.copy(isFilteringEnabled = false)
     }
 
     fun clearSearch() {

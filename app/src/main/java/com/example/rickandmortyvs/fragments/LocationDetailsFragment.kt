@@ -34,7 +34,7 @@ class LocationDetailsFragment : Fragment() {
 
     private val args by navArgs<LocationDetailsFragmentArgs>()
 
-    var params: LocationDetails? = null
+    private var locationDetails: LocationDetails? = null
 
 
     override fun onCreateView(
@@ -44,19 +44,8 @@ class LocationDetailsFragment : Fragment() {
     ): View {
 
         viewModel.checkNetworkAvailability(requireContext())
-        viewLifecycleOwner.lifecycleScope.launch {
-            params = viewModel.getLocationDetails(args.id)
-            with(binding) {
-                locationDetailsNameText.text = params?.name
-                locationDetailsDimensionText.text = params?.dimension
-                locationDetailsTypeText.text = params?.type
-                toolbar.title = params?.name
-            }
-            viewModel.getMultipleCharacters(params?.residents)
-
-        }
+        uiInitialization()
         displayEpisodesRecyclerView()
-
         binding.toolbar.setOnClickListener { findNavController().popBackStack() }
 
         return binding.root
@@ -72,6 +61,20 @@ class LocationDetailsFragment : Fragment() {
                     adapter.submitList(it)
                 }
             }
+        }
+    }
+
+    private fun uiInitialization() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            locationDetails = viewModel.getLocationDetails(args.id)
+            with(binding) {
+                locationDetailsNameText.text = locationDetails?.name
+                locationDetailsDimensionText.text = locationDetails?.dimension
+                locationDetailsTypeText.text = locationDetails?.type
+                toolbar.title = locationDetails?.name
+            }
+            viewModel.getMultipleCharacters(locationDetails?.residents)
+
         }
     }
 }

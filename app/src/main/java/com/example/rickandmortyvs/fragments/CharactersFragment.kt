@@ -51,9 +51,7 @@ class CharactersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         searchAndFilterParamsCleaning()
-        binding.verticalRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.verticalRecyclerView.adapter = adapter
-        binding.placeHolderTextView.visibility = View.GONE
+        uiInitialization()
         bottomSheetSetup()
         searchBottomSheetSetup()
         swipeToRefreshSetup()
@@ -229,6 +227,17 @@ class CharactersFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun uiInitialization() {
+        binding.verticalRecyclerView.layoutManager =
+            GridLayoutManager(requireContext(), COLUMNS_COUNT_VERTICAL)
+        binding.verticalRecyclerView.adapter = adapter
+        binding.placeHolderTextView.visibility = View.GONE
+    }
+
+    companion object {
+        private const val COLUMNS_COUNT_VERTICAL = 2
     }
 
 

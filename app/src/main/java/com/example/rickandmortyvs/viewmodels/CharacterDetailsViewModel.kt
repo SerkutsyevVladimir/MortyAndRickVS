@@ -33,9 +33,6 @@ class CharacterDetailsViewModel @Inject constructor(
     private val _episodesStateFlow = MutableStateFlow<List<Episode>?>(emptyList())
     val episodeStateFlow: StateFlow<List<Episode>?> = _episodesStateFlow
 
-    private val _characterStateFlow = MutableStateFlow<Characters?>(null)
-    val characterStateFlow: StateFlow<Characters?> = _characterStateFlow
-
     fun checkNetworkAvailability(context: Context) {
         viewModelScope.launch {
             _networkStateFlow.value = isOnline(context)
